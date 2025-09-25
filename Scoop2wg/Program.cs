@@ -172,7 +172,13 @@ namespace Scoop2wg
         static Installer ConvertInstaller(ScoopArchitecture scoopInstaller)
         {
             var result = new Installer();
-            result.Architecture = Enum.Parse<Architecture>(scoopInstaller.ArchitectureValue, true);
+            result.Architecture = scoopInstaller.ArchitectureValue switch
+            {
+                "32bit" => Architecture.X86,
+                "64bit" => Architecture.X64,
+                "arm64" => Architecture.Arm64,
+                "neutral" => Architecture.Neutral,
+            };
             result.InstallerUrl = scoopInstaller.Url[0];
             result.InstallerSha256 = scoopInstaller.Hash[0];
             if (scoopInstaller.Url[0].EndsWith(".exe"))
