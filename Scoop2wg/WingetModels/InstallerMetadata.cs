@@ -1,0 +1,79 @@
+﻿// Copyright (c) Microsoft. All rights reserved.
+// Licensed under the MIT license.
+
+namespace Scoop2wg.WingetModels
+{
+    using System.Collections.Generic;
+    using Scoop2wg.WingetModels.Installer;
+
+    /// <summary>
+    /// Helper class for storing an installer's metadata information.
+    /// </summary>
+    public class InstallerMetadata
+    {
+        /// <summary>
+        /// Gets or sets the installer url.
+        /// </summary>
+        public string InstallerUrl { get; set; }
+
+        /// <summary>
+        /// Gets or sets the path to the package to extract metadata from.
+        /// </summary>
+        public string PackageFile { get; set; }
+
+        /// <summary>
+        /// Gets or sets the new installers for updating the manifest.
+        /// </summary>
+        public List<Installer.Installer> NewInstallers { get; set; } = new List<Installer.Installer>();
+
+        /// <summary>
+        /// Gets or sets the architecture detected from the URL string.
+        /// </summary>
+        public Architecture? UrlArchitecture { get; set; }
+
+        /// <summary>
+        /// Gets or sets the architecture detected from the binary.
+        /// </summary>
+        public Architecture? BinaryArchitecture { get; set; }
+
+        /// <summary>
+        /// Gets or sets the architecture specified as an override.
+        /// </summary>
+        public Architecture? OverrideArchitecture { get; set; }
+
+        /// <summary>
+        /// Gets or sets the scope specified as an override.
+        /// </summary>
+        public Scope? OverrideScope { get; set; }
+
+        /// <summary>
+        /// Gets or sets the display version specified as a CLI arg or an installer url argument.
+        /// </summary>
+        public string DisplayVersion { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the installer came from a zip.
+        /// </summary>
+        public bool IsZipFile { get; set; } = false;
+
+        /// <summary>
+        /// Gets or sets the relative paths contained inside a zip.
+        /// </summary>
+        public List<string> RelativeFilePaths { get; set; }
+
+        /// <summary>
+        /// Gets or sets the nested installer files coming from previous installer.
+        /// </summary>
+        public List<NestedInstallerFile> NestedInstallerFiles { get; set; }
+
+        /// <summary>
+        /// Gets or sets a value indicating whether the nested installers in a zip have multiple architectures.
+        /// </summary>
+        public bool MultipleNestedInstallerArchitectures { get; set; }
+
+        /// <summary>
+        /// Gets or sets the directory path of the extracted files from the target zip package file.
+        /// </summary>
+        public string ExtractedDirectory { get; set; }
+    }
+}
